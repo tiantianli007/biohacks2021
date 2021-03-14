@@ -3,10 +3,6 @@ import re
 from random import randint, random
 from math import floor
 from time import perf_counter
-from Bio import SeqIO
-from Bio.Seq import Seq
-from Bio import pairwise2
-from Bio.Align.Applications import MuscleCommandline
 
 # Sequence file containing the sequences to perform MSA on
 seq_file = os.path.join('.', 'samples', 'input_5_items.fasta')
@@ -40,7 +36,6 @@ percent_crossover = 1.0 - percent_strongest_to_next_gen - percent_pop_random
 # that any particular gene (which is a sequence) will be swapped
 percent_gene_swap = 0.5
 
-
 class ProteinSequence:
     """Defines a protein sequence."""
     def __init__(self, title, seq=''):
@@ -51,7 +46,6 @@ class Population:
     """A population contains a fixed number of protein sequences."""
     def __init__self(self, pop_size):
         pass
-
 
 def load_sequences(filepath):
     """Loads all the sequences from the given file.
@@ -70,7 +64,6 @@ def load_sequences(filepath):
                 # a genome sequence
                 protein_seqs[-1].raw_seq += line.rstrip()
     return protein_seqs
-
 
 def insert_mutation(seq):
     """Inserts a random mutation into the sequence.
@@ -167,21 +160,6 @@ def crossover(parent_A, parent_B):
 
 # Application entry point
 if __name__ == '__main__':
-    # orig_sequences = load_sequences('./outputs/output.fasta')
-    # print(orig_sequences[0].raw_seq)
-    # print([len(seq.raw_seq) for seq in orig_sequences])
-    # print(compute_fitness(orig_sequences))
-    # print(len(orig_sequences))
-
-    # print('Aligning with Biopython...')
-    # biopython_start_time = perf_counter()
-    # #os.path.join('.', 'outputs', 'output.fasta')
-    # muscle_cline = MuscleCommandline("muscle.exe", input='./samples/input.fasta', out='./outputs/output.fasta')
-    # muscle_cline()
-    # aligned_list = [elem for elem in SeqIO.parse(seq_file, "fasta")]
-    # biopython_end_time = perf_counter()
-    # print(f'Done! Took {biopython_end_time - biopython_start_time}s')
-    
     # Get the original unaligned sequences
     orig_sequences = load_sequences(seq_file)
     

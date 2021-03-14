@@ -15,7 +15,7 @@ There are of course, numerous optimizations and clever heuristics that can signi
 
 # GA-MSA
 
-The Genetic Algorithm-Multiple Sequence Alignment (GA-MSA) is a new approach to MSA using a Genetic Algorithm (GA). 
+The Genetic Algorithm-Multiple Sequence Alignment (GA-MSA) is a new approach to MSA using a Genetic Algorithm (GA).
 
 # Try it out
 
@@ -30,6 +30,21 @@ These samples are of SARS-CoV-2 which we got from the [NLM](https://www.ncbi.nlm
 In main.py, use the seq_file to select which sample to use, (warning, 64 can take very long!). Then run: `python main.py` The results of each generation and the score of each individual (which is the list of sequences to perform MSA on) can be seen. 
 
 To see how that compares to a real industry level MSA algorithm, run `python biopytest.py`.
+
+# How does it work?
+
+GA-MSA employs a genetic algorithm. We begin by defining some terminology.
+
+- **Gene**: a single sequence in a list of sequences that we wish to align
+- **Individual**: the list of sequences that we wish to align
+- **Population**: a group of individuals, each with different genes
+- **Generation**: an instance of a population
+
+We begin with generation 1. We take the list of sequences we wish to align and simply generate random gaps to fill them all. An individual consists of those current sequences, where all of them share the same length. Multiple individuals are produced to make a population.
+
+The iterative portion begins now. We compute a fitness score for each individual. In our case, we count the number of differences between the sequences, therefore, the lower the fitness score the better. We take the strongest individuals, cross breed them by interwining genes, and this produces the next generation.
+
+We continue doing for a specified number of generations. The idea is that hopefully, at the end, we have converged onto an optimal solution.
 
 # Results
 
